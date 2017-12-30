@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<meta charset = "UTF-8">
+		<link href="./style.css" type="text/css" rel="stylesheet">
+		<script src = "JS_GM.js"></script>
+		<title>
+			Graphics and Media Demonstration
+		</title>
+	</head>
+	<header>
+		<h1>
+			Below you can find a couple embedded forms of media.
+		</h1>
+	</header>
+	<body>
+		<p class = "right"><a href = "./index.html">Return Home</a></p>
+		<div>
+			<h2>
+				The Canvas Element
+			</h2>
+			<p>Below is a drawing of a house, embedded using the canvas element.
+			<br>It is an example of raster graphics, as each individual pixel is edited and set to form the image.</p>
+			<canvas id = "demoCanvas" class = "box" height = "85" width = "220">
+				The canvas element is not supported.
+			</canvas>
+			<script>
+				canvasHouse ("demoCanvas");
+			</script>
+		</div>
+		<div>
+			<h2>
+				The "svg" Element
+			</h2>
+			<p>Below is a circle with text inside, made using "svg," which stands for "scalable vector graphics."
+			<br>Needless to say, this is an example of vector graphics, in which information about the elements of the
+			<br>image are stored and used to construct the image.</p>
+			<svg width = "200", height = "200">
+				<circle cx = "100" cy = "100" r = "90" stroke = "#000000" stroke-width = "5" fill = "#ffffb0" />
+				<text fill = "#ff00ff" font-size = "22" font-family = "Times New Roman" x = "25" y = "111">
+					Vector Graphics!
+				</text>
+				The "svg" element is not supported.
+			</svg>
+		</div>
+		<div>
+			<h2>
+				The Audio Element
+			</h2>
+			<p>Below is the controls for the background audio you have been listening to if you have not stopped or muted it.
+			<br>If you would like, you can mute or stop it using the bar below.</p>
+			<audio autoplay loop controls>
+				<source src = "./Piano Loop.wav" type = "audio/wav">
+				<source src = "./Piano Loop.mp3" type = "audio/mpeg">
+				The audio tag is not supported.
+			</audio>
+		</div>
+		<div>
+			<h2>
+				The Video Element
+			</h2>
+			<p>Below is a video of what would happen if a sample of the sun's chromosphere were brought to Earth.
+			<br>The clip is from a video by "Kurzgesagt – In a Nutshell" on youtube.
+			<br>I recommend viewing it by clicking the link below the video.</p>
+			<video width = "640" height = "480" controls>
+				<source src = "./Sample of the Chromosphere.mp4" type = "video/mp4">
+				It appears that mp4 videos are not supported.
+			</video>
+			<p>The video can be found <a href = "https://www.youtube.com/watch?v=J0ldO87Pprc" >here</a>.</p>
+		</div>
+	</body>
+	<footer>
+		<p class = "right"><a href = "./SiteChangeLog.html">View Changelog</a>&nbsp|&nbsp<a href = "./index.html">Return Home</a></p>
+	</footer>
+</html>

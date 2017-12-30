@@ -1,0 +1,60 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	background-color: #add8e6;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+#UpperNav {
+    position: fixed;
+    right: 0;
+    padding: 20px;
+	margin: 10px;
+	background-color: #FFDDDD;
+	z-index: 10;
+}
+
+ul, ol {
+	padding-left: 20px;
+}
+
+h1 {
+	margin: 10px;
+}
+
+.block {
+	padding: 10px;
+	display: inline-block;
+	width: auto;
+	height: auto;
+	position: relative;
+}
+
+#LogImg {
+	background-color: #FFFFFF;
+	border-color: #00FF00;
+}
+
+.bordered {
+	border: 5px;
+	border-style: solid;
+	border-radius: 25px;
+	border-color: #000000;
+	margin: 5px;
+}
+
+#requirements {
+	background-color: #DDFFDD;
+	border-color: #FF00FF;
+}

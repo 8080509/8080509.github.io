@@ -1,0 +1,60 @@
+* {
+	background-color: #f0f0ff;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.indent {
+	margin-left: 40px;
+}
+
+.demo {
+	padding: 5px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+}
+
+.demo table, .demo td {
+	padding: 5px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	text-align: center;
+}
+
+.demoTitle {
+	font-size: 25px;
+}
+
+.autoScrollBox {
+	overflow: auto;
+}
+
+.blankTab td {
+	border-style: none;
+	text-align: left;
+}
+
+.blankTab th {
+	text-align: right;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #FF0000;
+}

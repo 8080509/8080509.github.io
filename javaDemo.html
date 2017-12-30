@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+	<head>
+		<meta charset = "UTF-8">
+		<link href="./style.css" type="text/css" rel="stylesheet">
+		<script src = "JS_Demo.js"></script>
+		<script src = "CaesarCipher.js"></script>
+		<title>
+			JavaScript Demo Page
+		</title>
+	</head>
+	<header>
+		<h1>Welcome to my JavaScript Demo Page!</h1>
+		<p class = "right"><a href = "./index.html">Return Home</a></p>
+	</header>
+	<body>
+		<p>Below you can find a few examples of JavaScript.</p>
+		<div>
+			<div>
+				<h2 class = "demoTitle">Merge Two Sorted Lists</h2>
+				<div class = "planning indent">
+					<p>Given two arrays, A1 and A2, create two indexes, i1 and i2.
+					<br>Create a third array, A3, which will be output at the end, with a corresponding index, i3.
+					<br>Iterate over all possible values of i3, noting that the size of A3 will be the sum of the sizes of A1 and A2.
+					<br>Each time, set A3[i3] to the lower of A1[i1] and A2[i2].
+					<br>Whichever is added, increment the corresponding index.
+					<br>Once complete, output A3.</p>
+				</div>
+			</div>
+			<div class = "demo indent">
+				<p>Please place each sorted array in the provided boxes (without brackets, since they are already included outside the box), labeled Array 1 and Array 2, and with each term separated by a comma.</p>
+				<label for="d1i1">Array 1: [</label><input name = "Array 1" type = "text" id = "d1i1" value = "2,5,6,7,7,9">]
+				<br>
+				<label for="d1i2">Array 2: [</label><input name = "Array 2" type = "text" id = "d1i2" value = "1,4,6,6,10">]
+				<br>
+				<button onclick = "demo1('d1i1', 'd1i2', 'd1o1')">Click to merge lists!</button>
+				<br>
+				<label for="d1o1">Output: [</label><input name = "Output" type = "text" id = "d1o1" value = "" readonly>]
+			</div>
+		</div>
+		<div>
+			<div>
+				<h2 class = "demoTitle">Multiplication Table</h2>
+				<div class = "planning indent">
+					<p>Given two numbers, build a table with those dimensions listing all products of those numbers.
+					<br>To implement this, create an html table, and iterate over the rows and collumns, storing the product in each cell.</p>
+				</div>
+			</div>
+			<div class = "demo indent">
+				<p>Please place the desired number of rows and collumns.</p>
+				<label for = "d2i1">Row Maximum: </label><input name = "Maximum Row" type = "number" id = "d2i1" value = "12">
+				<label for = "d2i2">Column Maximum: </label><input name = "Maximum Collumn" type = "number" id = "d2i2" value = "12">
+				<button onclick = "demo2('d2i1', 'd2i2', 'd2o1')">Click to fill table!</button>
+				<div class = "autoScrollBox">
+					<div id = d2o1></div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<h2 class = "demoTitle">Tic Tac Toe</h2>
+				<div class = "planning indent">
+					<p>This game has an AI, which if allowed to move first, can win rather often, and it will never lose.
+					<br>There are 362,880 (9!) possible sequences of selecting from a set of nine.
+					<br>There are 19,683 (3^9) possible arrays with 9 elements, when each element can have one of three different values.
+					<br>Due to the impracticality of mapping all of these, a different approach is needed.
+					<br>Since a round ends in nine moves or fewer, only nine board arragements need to be considered at once!
+					<br>In essence, the AI will scan a tree of all possible move sequences, while only storing up to nine elements!
+					<br>To do this, I create a scan function.  It takes 3 arguments:  The desired winner, the opponent, and the current player.
+					<br>It returns an array with three elements:  [guarantee of victory?, number of potential victories, possiblility of loss?].
+					<br>If the scan function is given a board where the desired winner wins, it returns [true, 1, false].
+					<br>If given a board where the opponent wins, it returns [false, 0, true].
+					<br>In the event that a given board is not a draw, but not yet has a winner, it iterates through the possible moves and combines the results of calling scan on those boards.
+					<br>This would have been much harder if not for recursion.
+					<br>In order to optimize, the search ends when it finds a move that guarantees victory, even if a move later in the search would grant a more immediate one.</p>
+				</div>
+			</div>
+			<div class = "demo indent">
+				<div>
+					Would you like to play a game of Tic Tac Toe?
+					<br>Please select which player(s) you would like to play for.
+					<br>Player 1 goes first:
+					<br><input name = "Player 1?" type = "checkbox" id = "d3i1" checked><label for = "d3i1">Player 1</label>
+					<br><input name = "Player 2?" type = "checkbox" id = "d3i2"><label for = "d3i2">Player 2</label>
+					<br><button onclick = "demo3start('d3i1', 'd3i2', 'd3b1')">Click to start game!</button>
+					<br><table id = "d3b1"></table>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<h2 class = "demoTitle">Caesar Cipher</h2>
+				<div class = "planning indent">
+					<p>The goal is to take a string, and shift each letter's value by a certain amount.
+					<br>To accomplish this, I create a more general mechanism, then feed it the specific values I need.
+					<br>Specifically, I create a function that takes an array of ranges, each one having a start, end, and amount to displace.
+					<br>For a cipher shifting uppercase and lowercase alphabetic characters 3 down, the range array will look like this:  [[65, 90, 3], [97, 122, 3]]
+					<br>63, 90, 97, and 122 are the decimal representations of the character codes for "A", "Z", "a", and "z" respectively.
+					<br>Character codes between 63 and 90 will be increased by 3, and character codes between 97, and 122 will be increased by 3.
+					<br>Additionally, if a code is increased passed the top of its range, it is shifted down to the bottom of the range.
+					<br>The character character code for "Y", 89 if increased by three, will loop back to the code for "B", 66.
+					<br>To make use of this system, an input string is converted into an array of character codes, which this function is then applied to.
+					<br>The resulting array can then be converted back to a string, and is output.
+					<br>This system can be provided different input arrays, even including ranges that overlap.  The instructions for ranges are executed left to right.
+					<br>There is also a function for creating inverse range arrays that, once applied to ciphertext, reveal the original message.
+					<br>This inverse function does properly accomadate even more complicated range arrays.</p>
+				</div>
+			</div>
+			<div class = "demo indent">
+				<div id = "d4r1">
+					Enter your string and displacement below.
+					<table class = "blankTab">
+						<tr>
+							<th><label for = "d4i1">Input Message:</label></th>
+							<td><input name = "stringIn" type = "text" id = "d4i1" value = "Hello World!"></td>
+						</tr>
+						<tr>
+							<th><label for = "d4i2">Displacement :</label></th>
+							<td><input name = "dispIn" type = "number" id = "d4i2" value = 3></td>
+						</tr>
+						<tr>
+							<th colspan = "2"><button id = "d4b1" onclick = "demo4chCoArrIn('d4i1', 'd4i3'); demo4basicRangesArr('d4i4'); demo4rangesArr('d4i2','d4i4','d4i5'); demo4chCoArrOut('d4i3','d4i5','d4i6'); demo4output('d4i6','d4o2')">(De)Cipher!</button></th>
+						</tr>
+					</table>
+				</div>
+				<div id = "d4r2">
+					<br>These are the inner mechanics of how this works.
+					<table class = "blankTab">
+						<tr>
+							<th><label for = "d4i3">Character Code Input Array:</label></th>
+							<td><input name = "chCoArrIn" type = "text" id = "d4i3"></td>
+							<td><button onclick = "demo4chCoArrIn('d4i1', 'd4i3')">Update</button>&nbspPulls from the "Input Message" entry above.</td>
+						</tr>
+						<tr>
+							<th><label for = "d4i4">Basic Ranges Array:</label></th>
+							<td><input name = "defRangeArr" type = "text" id = "d4i4"></td>
+							<td><button onclick = "demo4basicRangesArr('d4i4')">Reset</button>&nbspResets based on stored information.</td>
+						</tr>
+						<tr>
+							<th><label for = "d4i5">Ranges Array:</label></th>
+							<td><input name = "rangeArr" type = "text" id = "d4i5"></td>
+							<td><button onclick = "demo4rangesArr('d4i2','d4i4','d4i5')">Update</button>&nbspGenerates a useful ranges array by using the ranges from the above field, and the displacement at the top.</td>
+						</tr>
+						<tr>
+							<th><label for = "d4o1">Inverse Ranges Array:</label></th>
+							<td><input name = "invRangeArr" type = "text" id = "d4o1" readonly></td>
+							<td><button onclick = "demo4invRangesArr('d4i5','d4o1')">Generate</button>&nbspCreates an inverse ranges array that counters the ranges array in the above field.</td>
+						</tr>
+						<tr>
+							<th><label for = "d4i6">Character Code Output Array:</label></th>
+							<td><input name = "chCoArrOut" type = "text" id = "d4i6"></td>
+							<td><button onclick = "demo4chCoArrOut('d4i3','d4i5','d4i6')">Generate</button>&nbspRuns the cipher on the "Character Code Input Array" using the "Ranges Array."</td>
+						</tr>
+						<tr>
+							<th/ colspan = "2">
+							<td><button onclick = "demo4output('d4i6','d4o2')">Output</button>&nbspUses the above field to fill the "Output Message" field.</td>
+						</tr>
+					</table>
+				</div>
+				<div id = "d4r3">
+					Here is the output:
+					<br><label for = "d4o2">Output Message:&nbsp</label><input name = "stringOut" type = "text" id = "d4o2" readonly>
+				</div>
+				<div id = "d4r4">
+					<br>
+					To use a different range array, follow these instructions:
+					<ol>
+						<li>Copy the desired range array into the "Ranges Array" field.</li>
+						<li>Click "Update" by the "Character Code Input Array" field to bring in the string in the "Input Message" field.</li>
+						<li>Click "Generate" by the "Character Code Output Array" field to (de)cipher the character codes.</li>
+						<li>Click "Output" just below the previous button to convert the new character codes into text in the "Output" field.</li>
+					</ol>
+					Note:  To recover a message converted by one of these arrays, click "Generate" by the "Inverse Ranges Array" field.
+					<br>The returned range array can be applied to the ciphertext to retrive the original message.
+					<br>
+					<br>Below are a few more range arrays.  To use them, copy them into the "Ranges Array" field.
+					<table class = "blankTab">
+						<tr>
+							<th>[[65,90,5],[97,122,5],[116,121,1]]</th>
+							<td>Shifts the basic alphabetic characters by five, skipping "t".
+						</tr>
+						<tr>
+							<th>[[33,47,5],[48,57,5],[58,64,5],[65,90,5],[91,96,5],[97,122,5],[123,126,5]]</th>
+							<td>Shifts the basic alphabetic characters and groups of punctuation symbols by 5. (space is ignored)</td>
+						</tr>
+						<tr>
+							<th>[[65,90,3],[97,122,3],[192,222,3],[223,255,3],[256,383,3],[384,591,3]]</th>
+							<td>Shifts the basic alphabetic characters and groups of special characters by 3.  This is the default.</td>
+						</tr>
+					</table>
+					Since the second and third entries in the above list shift each group by the same value, they can be put into the "Basic Ranges Array" field.
+					<br>Set the desired displacement in the provided field, then click update next to the "Ranges Array" field to get the new range array, which displaces the same groups, by the new value.
+					<br>
+					<br>Feel free to create your own range arrays.  They come in the form [[min1,max1,disp1],[min2,max2,disp2],[min3,max3,disp3],...]
+				</div>
+			</div>
+		</div>
+	</body>
+	<footer>
+		<p class = "right"><a href = "./SiteChangeLog.html">View Changelog</a>&nbsp|&nbsp<a href = "./index.html">Return Home</a></p>
+	</footer>
+</html>
