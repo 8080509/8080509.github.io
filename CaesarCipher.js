@@ -1,12 +1,14 @@
-function cipher(arr, ranges) {
+//Lars Nilsen
+
+function cipher(arr, ranges) { //takes a character code array, and a set of ranges to be shifted and runs the cipher.
 	let shiftArr = [];
 	for (let i = 0; i < arr.length; i++) {
 		let val0 = arr[i];
 		for (let j =  0; j < ranges.length; j++) {
 			let size = (ranges[j][1] - ranges[j][0] + 1);
-			if (val0 >= ranges[j][0] && val0 <= ranges[j][1]) {
+			if (val0 >= ranges[j][0] && val0 <= ranges[j][1]) { //shifts each char code range according to the range array.
 				val0 += ranges[j][2];
-				while (val0 < ranges[j][0]) {val0 += size};
+				while (val0 < ranges[j][0]) {val0 += size};// ensures the ouput values are within the array.
 				while (val0 > ranges[j][1]) {val0 -= size};
 			};
 		};
@@ -15,7 +17,7 @@ function cipher(arr, ranges) {
 	return shiftArr;
 };
 
-function invRange(ranges) {
+function invRange(ranges) { //creates the inverese ranges array.  It negates the displacement, and reverses the order of arrays.
 	let newRanges = [];
 	for (let i = 0; i < ranges.length; i++) {
 		let j = ranges.length - i - 1;
@@ -25,7 +27,7 @@ function invRange(ranges) {
 	return newRanges;
 };
 
-function setDisp(disp, ranges) {
+function setDisp(disp, ranges) { //Changes the displacement value in each range.
 	let newRanges = [];
 	for (let i = 0; i < ranges.length; i++) {
 		newRanges[i] = ranges[i];
