@@ -1,20 +1,13 @@
-/*arrayIn(stIn) {
-	let stArr = stIn.split("");
-	let i = 0;
-	let newArr = [];
-	while (stArr[i] != '[') {i++};
-	while (stArr[i] != ']') {
-	}
-}*/
+//Lars Nilsen
 
-function boxArr(id) {return document.getElementById(id).value.split(',').map(function(i) {return parseFloat(i);});};
+function boxArr(id) {return document.getElementById(id).value.split(',').map(function(i) {return parseFloat(i);});};//Provides a float array from a text box input with the id, id.
 
-function boxOut(id, stOut) {document.getElementById(id).value = stOut;}
+function boxOut(id, stOut) {document.getElementById(id).value = stOut;}//Places a string ouput stOut, into a text box, with id, id.
 
-function mergSorted(a1, a2) {
+function mergSorted(a1, a2) {//This is the function to merge sorted lists.
     let i = 0;
     let j = 0;
-	a1.push(Infinity);
+	a1.push(Infinity);//Appends Infinity to each list so that it does not try to append undefined to a3.
 	a2.push(Infinity);
     let a3 = [];
     for (let k = 0; k < (a1.length + a2.length - 2); k++) {
@@ -29,7 +22,7 @@ function mergSorted(a1, a2) {
     return a3;
 }
 
-function checkSorted(a1) {
+function checkSorted(a1) {//checks that the input list is actually sorted.
 	let sorted = true;
 	for (let i = 1; i < a1.length; i++) {
 		sorted = (a1[i-1] > a1[i])? false : sorted;
@@ -37,13 +30,13 @@ function checkSorted(a1) {
 	return sorted;
 }
 
-function demo1(in1, in2, out1) {
+function demo1(in1, in2, out1) {//Code for the first demo.
 	let arr1 = boxArr(in1);
 	let arr2 = boxArr(in2);
 	let output = "";
-	if (arr1.some(function(i) {return isNaN(i);}) || arr2.some(function(i) {return isNaN(i);})) {
+	if (arr1.some(function(i) {return isNaN(i);}) || arr2.some(function(i) {return isNaN(i);})) {//ensures all inputs were properly parsed as floats.
 		output = "At least one input did not make sense.";
-	} else if(checkSorted(arr1) && checkSorted(arr2)) {
+	} else if(checkSorted(arr1) && checkSorted(arr2)) {//ensures the lists are sorted before attempting to merge based on that assumption.
 		let arr3 = mergSorted(arr1, arr2);
 		output = arr3.join(', ');
 	} else {
@@ -52,7 +45,7 @@ function demo1(in1, in2, out1) {
 	boxOut(out1, output);
 }
 
-function mTabCell(i1,i2) {
+function mTabCell(i1,i2) {//makes table cell, at row i1, and collumn i2
 	let output = '';
 	if (i1 === 0 || i2 === 0) {
 		if(i1 === i2) {
@@ -66,27 +59,27 @@ function mTabCell(i1,i2) {
 	return output;
 }
 
-function demo2(in1, in2, out1) {
-	let rMax = parseInt(document.getElementById(in1).value);
+function demo2(in1, in2, out1) {//code for the second demo.
+	let rMax = parseInt(document.getElementById(in1).value);//ensures each input is, in fact, an integer.
 	let cMax = parseInt(document.getElementById(in2).value);
 	let output = '';
-	if ( isNaN(rMax) || isNaN(cMax) ) {
+	if ( isNaN(rMax) || isNaN(cMax) ) {//ensures both inputs were properly parsed.
 		output = 'At least one input is not a number.';
 	} else {
 		output = '<table>';
-		for (let r = 0; r <= rMax; r++) {
+		for (let r = 0; r <= rMax; r++) {//iterates through each row and then collumn to create the whole table.
 			output += '<tr>';
 			for (let c = 0; c <= cMax; c++) {
 				output += mTabCell(r,c);
 			}
 			output += '</tr>';
 		}
-		output += '</table>';
+		output += '</table>';//closes the table element.
 	}
 	document.getElementById(out1).innerHTML = output;
 };
 
-///*
+
 
 
 function TicTacToeBoard(a) { //constructor for the TicTacToeBoard class.  Takes the value for content.
@@ -145,15 +138,15 @@ function TicTacToeBoard(a) { //constructor for the TicTacToeBoard class.  Takes 
 		let pLoss = [];
 		let mSeq = [];
 		let d = 0;*/
-		let gV = false;
-		let pV = 0;
-		let pL = false;
-		if(this.win(p1)) {
+		let gV = false; //Path has guarenteed victory
+		let pV = 0; //Number of potential victories.
+		let pL = false; //Path has potential for loss (Assumes perfect opponent)
+		if(this.win(p1)) { //if p1 wins, which it wants, it saves these values to gV and pV
 			gV = true;
 			pV = 1;
-		} else if (this.win(p2)) {
+		} else if (this.win(p2)) { //if p2 wins, which it does not want, it saves this value to pL
 			pL = true;
-		} else if (this.content.some(function(j) {return j === 0;})) {
+		} else if (this.content.some(function(j) {return j === 0;})) { //if nobody wins, and there is a playable spot, searches for winning moves.
 			let i = 0;
 			let b;
 			let bOutcome = [];
@@ -171,12 +164,12 @@ function TicTacToeBoard(a) { //constructor for the TicTacToeBoard class.  Takes 
 			while (!stop && i < 9) {
 				b = new TicTacToeBoard(this.content);
 				if (b.play(sp, i)) {
-					bOutcome = b.scan(p1, p2, np);
+					bOutcome = b.scan(p1, p2, np); // Recursive call.
 				} else {
 					bOutcome = undefined;
 				}
-				if ((typeof bOutcome) === 'object') {
-					switch (sp) {
+				if ((typeof bOutcome) === 'object') {//ensure the previous move was valid before using it.
+					switch (sp) { //values are assigned differently based on who is playing.
 						case p1:
 							gV = bOutcome[0]? true : gV;
 							pV += bOutcome[1];
@@ -208,16 +201,16 @@ function TicTacToeBoard(a) { //constructor for the TicTacToeBoard class.  Takes 
 			}
 			i++;
 		}
-		if(found) {
+		if(found) { //If a guarenteed victory is found, the search stops, and returns that move.
 			m = i - 1;
 		} else {
 			let temp = outcomes.filter(function(j) {return !j[2];}); // creates array temp, which is the set of all outcomes where there is not a way for the opponent to force victory.
-			temp = (temp === [])? outcomes : temp;
+			temp = (temp === [])? outcomes : temp; //if temp is now empty, replaces it with the outcomes array.
 			let k = 0;
 			for(let l = 0; l < temp.length; l++) {
 				k = (temp[l][1] > temp[k][1])? l : k;
 			}
-			m = outcomes.indexOf(temp[k]);
+			m = outcomes.indexOf(temp[k]); //gets the number of the best move.
 		}
 		return m;
 	};
@@ -245,9 +238,9 @@ function demo3start(pl1, pl2, tableId) {
 	demo3compPlay();
 }
 
-function demo3play(m) {
-	if((d3game.turn === 1 && d3game.h1) || (d3game.turn === 2 && d3game.h2)){
-		if (d3game.board.play(d3game.turn, m)) {
+function demo3play(m) { //plays move at m
+	if((d3game.turn === 1 && d3game.h1) || (d3game.turn === 2 && d3game.h2)){ //ensures it is the player's move
+		if (d3game.board.play(d3game.turn, m)) { //actually plays move.
 			demo3endTurn();
 		}
 	}
@@ -255,13 +248,13 @@ function demo3play(m) {
 }
 
 function demo3compPlay() {
-	while(!((d3game.turn === 1 && d3game.h1) || (d3game.turn === 2 && d3game.h2) || d3game.board.win(1) || d3game.board.win(2) || d3game.board.content.indexOf(0) === -1)) {
+	while(!((d3game.turn === 1 && d3game.h1) || (d3game.turn === 2 && d3game.h2) || d3game.board.win(1) || d3game.board.win(2) || d3game.board.content.indexOf(0) === -1)) { //a series of conditions in which the computer should not play.  Continues playing until one is true.
 		d3game.board.playBestMove(d3game.turn, 3 - d3game.turn);
 		demo3endTurn();
 	}
 }
 
-function demo3updateBoard(tableId, clickable, message) {
+function demo3updateBoard(tableId, clickable, message) { //creates the table in the html page.
 	let tab = '';
 	for(let r = 0; r < 3; r++) {
 		tab += '<tr>';
@@ -284,7 +277,7 @@ function demo3updateBoard(tableId, clickable, message) {
 	document.getElementById(tableId).innerHTML = tab;
 }
 
-function demo3endTurn() {
+function demo3endTurn() { //performs a few closing actions to end a turn.
 	let done = true;
 	let msg = '';
 	if (d3game.board.win(1)) {
@@ -298,7 +291,7 @@ function demo3endTurn() {
 	demo3updateBoard(d3game.tabId, !done, msg);
 }
 
-//*/
+
 
 
 
